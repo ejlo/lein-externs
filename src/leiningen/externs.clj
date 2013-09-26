@@ -36,11 +36,22 @@ file."
 
 (defn externs
   "Generate an externs file"
-  [project & args]
-  (let [files (->> (:root project)
-                   (java.io.File.)
-                   file-seq
-                   (filter cljs-file?))
-        extern-defs (mapcat extract-externs files)
-        result (generate-extern-object extern-defs)]
+  [project & [build-type]]
+  (let [source-paths (if build-type
+                       (->> project
+                            :cljsbuild
+                            :builds
+                            ((keyword build-type))
+                            :source-paths)
+                         ["src" "cljs"])
+        files        (->> source-paths
+                          (map #(str (:root project) "/" %))
+                          (map io/file)
+                          (mapcat file-seq)
+                          (filter cljs-file?))
+        extern-defs  (->> (mapcat extract-externs files)
+                          (remove empty?)
+                          distinct
+                          (sort-by s/upper-case))
+        result       (generate-extern-object extern-defs)]
     (println result)))
