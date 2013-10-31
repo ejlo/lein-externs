@@ -1,25 +1,24 @@
 # lein-externs
 
-A Leiningen plugin to do many wonderful things.
+A Leiningen plugin to extract externs for your ClojureScript project
 
 ## Usage
 
-FIXME: Use this for user-level plugins:
+Put `[lein-externs "0.1.0"]` into the `:plugins` vector of your
+project.clj file or your `:user` profile
 
-Put `[lein-externs "0.1.0-SNAPSHOT"]` into the `:plugins` vector of your
-`:user` profile, or if you are on Leiningen 1.x do `lein plugin install
-lein-externs 0.1.0-SNAPSHOT`.
+Create the externs with:
 
-FIXME: Use this for project-level plugins:
+    $ lein externs > externs.js
 
-Put `[lein-externs "0.1.0-SNAPSHOT"]` into the `:plugins` vector of your project.clj.
+or, specify a build, e.g.:
 
-FIXME: and add an example usage that actually makes sense:
+    $ lein externs release > externs.js
 
-    $ lein externs
+
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Rasmus Buchmann, Erik Ouchterlony, Benjamin Teuber
 
 Distributed under the Eclipse Public License, the same as Clojure.
