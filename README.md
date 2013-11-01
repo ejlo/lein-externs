@@ -1,13 +1,12 @@
 # lein-externs
 
-A Leiningen plugin to extract externs for your ClojureScript project
+A Leiningen plugin to generate externs for your ClojureScript project
 
 ## Usage
 
-Put `[lein-externs "0.1.1"]` into the `:plugins` vector of your
-project.clj file or your `:user` profile
+Put `[lein-externs "0.1.1"]` into your `:user` profile or the `:plugins` vector of your project.clj file
 
-Create the externs with:
+Generete the externs with:
 
     $ lein externs > externs.js
 
