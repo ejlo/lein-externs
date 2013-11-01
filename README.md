@@ -4,7 +4,7 @@ A Leiningen plugin to extract externs for your ClojureScript project
 
 ## Usage
 
-Put `[lein-externs "0.1.0"]` into the `:plugins` vector of your
+Put `[lein-externs "0.1.1"]` into the `:plugins` vector of your
 project.clj file or your `:user` profile
 
 Create the externs with:
