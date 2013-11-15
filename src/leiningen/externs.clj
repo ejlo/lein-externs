@@ -86,6 +86,6 @@ file."
         extern-defs  (->> (mapcat extract-externs files)
                           (remove empty?)
                           distinct
-                          (sort-by s/upper-case))
+                          (sort-by (juxt s/upper-case identity)))
         result       (generate-extern-object extern-defs)]
     (println result)))
