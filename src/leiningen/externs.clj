@@ -68,16 +68,21 @@ file."
                       forms)
     @extern-defs))
 
+(defn get-source-paths [build-type builds]
+  (or
+   (when build-type
+     (:source-paths
+      (or ((keyword build-type) builds)
+          (first (filter #(= (name (:id %)) build-type) builds)))))
+   ["src" "cljs"]))
+
 (defn externs
   "Generate an externs file"
   [project & [build-type]]
-  (let [source-paths (if build-type
-                       (->> project
-                            :cljsbuild
-                            :builds
-                            ((keyword build-type))
-                            :source-paths)
-                         ["src" "cljs"])
+  (let [source-paths (->> project
+                          :cljsbuild
+                          :builds
+                          (get-source-paths build-type))
         files        (->> source-paths
                           (map #(str (:root project) "/" %))
                           (map io/file)
