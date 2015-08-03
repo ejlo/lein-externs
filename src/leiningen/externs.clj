@@ -57,16 +57,17 @@ file."
          (swap! extern-defs into))))
 
 (defn extract-externs [f]
-  (let [stream (java.io.PushbackReader.
-               (io/reader f))
-        forms (take-while #(not= ::stream-end %)
-                          (repeatedly (partial read stream false ::stream-end)))
-        extern-defs (atom [])]
-    (walk/postwalk #(find-extern % extern-defs)
-                   forms)
-    (subtree-postwalk #(find-extern-in-dot-form % extern-defs)
-                      forms)
-    @extern-defs))
+  (binding [*data-readers* (conj *data-readers* {'js identity})]
+    (let [stream (java.io.PushbackReader.
+                  (io/reader f))
+          forms (take-while #(not= ::stream-end %)
+                            (repeatedly (partial read stream false ::stream-end)))
+          extern-defs (atom [])]
+      (walk/postwalk #(find-extern % extern-defs)
+                     forms)
+      (subtree-postwalk #(find-extern-in-dot-form % extern-defs)
+                        forms)
+      @extern-defs)))
 
 (defn get-source-paths [build-type builds]
   (or
