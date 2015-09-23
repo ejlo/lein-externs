@@ -79,7 +79,7 @@ file."
 
 (defn externs
   "Generate an externs file"
-  [project & [build-type]]
+  [project & [build-type outfile]]
   (let [source-paths (->> project
                           :cljsbuild
                           :builds
@@ -94,4 +94,6 @@ file."
                           distinct
                           (sort-by (juxt s/upper-case identity)))
         result       (generate-extern-object extern-defs)]
-    (println result)))
+    (if outfile
+      (spit outfile result)
+      (println result))))

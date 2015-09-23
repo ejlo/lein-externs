@@ -6,18 +6,36 @@ A Leiningen plugin to generate externs for your ClojureScript project
 
 Put `[lein-externs "0.1.5"]` into your `:user` profile or the `:plugins` vector of your project.clj file
 
-Generete the externs with:
+Then run it with
 
-    $ lein externs > externs.js
+```
+lein externs [build] [output file]
+``` 
 
-or, specify a build, e.g.:
+Without the output file the extern is printed to standard out.
 
-    $ lein externs release > externs.js
 
+### Example:
+
+To use the default build for the project, run:
+```
+lein externs > externs.js
+```
+or
+```
+lein externs nil externs.js
+```
+
+
+Specify the release build with:
+
+```
+lein externs release externs.js
+```
 
 
 ## License
 
-Copyright © 2013 Rasmus Buchmann, Erik Ouchterlony, Benjamin Teuber
+Copyright © 2013-2015 Rasmus Buchmann, Erik Ouchterlony, Benjamin Teuber
 
 Distributed under the Eclipse Public License, the same as Clojure.
