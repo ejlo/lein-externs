@@ -1,4 +1,4 @@
-(defproject lein-externs "0.1.6-SNAPSHOT"
+(defproject lein-externs "0.1.6"
   :description "Quick extern scraper"
   :url "https://github.com/ejlo/lein-externs"
   :license {:name "Eclipse Public License"
