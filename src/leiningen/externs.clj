@@ -92,6 +92,7 @@ file."
                           (mapcat file-seq)
                           (filter cljs-file?))
         extern-defs  (->> (mapcat extract-externs files)
+                          (mapcat #(s/split % #"\."))
                           (remove empty?)
                           distinct
                           (sort-by (juxt s/upper-case identity)))
