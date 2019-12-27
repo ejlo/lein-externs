@@ -4,7 +4,9 @@ A Leiningen plugin to generate externs for your ClojureScript project
 
 ## Usage
 
-Put `[lein-externs "0.1.6"]` into your `:user` profile or the `:plugins` vector of your project.clj file
+Put 
+[![Clojars Project](https://img.shields.io/clojars/v/lein-externs.svg)](https://clojars.org/lein-externs)
+into your `:user` profile or the `:plugins` vector of your project.clj file
 
 Then run it with
 
