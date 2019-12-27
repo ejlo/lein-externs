@@ -1,4 +1,4 @@
-(defproject org.clojars.rasom/lein-externs "0.1.7"
+(defproject lein-externs "0.1.7"
   :description "Quick extern scraper"
   :url "https://github.com/ejlo/lein-externs"
   :license {:name "Eclipse Public License"
