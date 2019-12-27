@@ -61,7 +61,9 @@ file."
     (let [stream (java.io.PushbackReader.
                   (io/reader f))
           forms (take-while #(not= ::stream-end %)
-                            (repeatedly (partial read stream false ::stream-end)))
+                            (repeatedly (fn []
+                                          (try (read stream false ::stream-end)
+                                               (catch RuntimeException _)))))
           extern-defs (atom [])]
       (walk/postwalk #(find-extern % extern-defs)
                      forms)
@@ -90,6 +92,7 @@ file."
                           (mapcat file-seq)
                           (filter cljs-file?))
         extern-defs  (->> (mapcat extract-externs files)
+                          (mapcat #(s/split % #"\."))
                           (remove empty?)
                           distinct
                           (sort-by (juxt s/upper-case identity)))
